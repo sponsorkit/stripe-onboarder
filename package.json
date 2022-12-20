@@ -37,8 +37,6 @@
   ],
   "scripts": {
     "build": "tsup src/index.ts src/cli.ts --clean --dts --format esm",
-    "format": "prettier --check .",
-    "format:fix": "prettier --write .",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
     "start": "node dist/cli.js",
@@ -64,9 +62,7 @@
     "async-sema": "^3.1.1",
     "dotenv": "^16.0.2",
     "eslint": "^8.23.0",
-    "eslint-config-prettier": "^8.5.0",
     "is-ci": "^3.0.1",
-    "prettier": "^2.7.1",
     "ts-node": "^10.9.1",
     "tsup": "^6.5.0",
     "tsx": "^3.12.1",
