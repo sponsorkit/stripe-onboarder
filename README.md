@@ -1,5 +1,5 @@
 # About this fork
-*This fork resolves numerous issues with the original library (detailed [here](https://github.com/kgajera/stripe-onboarder/pull/7)) since it is used heavily by [Sponsorkit](https://github.com/sponsorkit). It has way more unit/integration tests to ensure stability, and will be kept up to date regularly.*
+*This fork resolves numerous issues with the original library (detailed [here](https://github.com/kgajera/stripe-onboarder/pull/7)) since it is used heavily by [Sponsorkit](https://github.com/sponsorkit). It has way more unit/integration tests and bug-fixes to ensure stability, and will be kept up to date regularly.*
 
 # Stripe Onboarder
 
