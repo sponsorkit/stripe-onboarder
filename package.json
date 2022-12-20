@@ -1,6 +1,6 @@
 {
-  "name": "stripe-onboarder",
-  "version": "1.0.5",
+  "name": "@sponsorkit/stripe-onboarder",
+  "version": "1.1.0",
   "description": "Automate onboarding Stripe Connect Express accounts using Puppeteer",
   "keywords": [
     "stripe",
@@ -11,13 +11,13 @@
     "node": ">=14.20"
   },
   "license": "MIT",
-  "homepage": "https://github.com/kgajera/stripe-onboarder#readme",
+  "homepage": "https://github.com/sponsorkit/stripe-onboarder#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kgajera/stripe-onboarder.git"
+    "url": "git+https://github.com/sponsorkit/stripe-onboarder.git"
   },
   "bugs": {
-    "url": "https://github.com/kgajera/stripe-onboarder/issues"
+    "url": "https://github.com/sponsorkit/stripe-onboarder/issues"
   },
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
