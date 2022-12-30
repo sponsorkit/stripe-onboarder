@@ -114,6 +114,10 @@ yargs(hideBin(process.argv))
             type: "string",
             default: defaults.title,
           },
+          debug: {
+            type: "boolean",
+            default: false,
+          },
         })
         .version(false);
     },

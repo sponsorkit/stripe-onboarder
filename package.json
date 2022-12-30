@@ -1,6 +1,6 @@
 {
   "name": "@sponsorkit/stripe-onboarder",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Automate onboarding Stripe Connect Express accounts using Puppeteer",
   "keywords": [
     "stripe",
