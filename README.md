@@ -1,11 +1,11 @@
 # About this fork
 
-_This fork resolves numerous issues with the original library (detailed [here](https://github.com/kgajera/stripe-onboarder/pull/7)) since it is used heavily by [Sponsorkit](https://github.com/sponsorkit). It has way more unit/integration tests and bug-fixes to ensure stability, and will be kept up to date regularly._
+_This fork resolves numerous issues with the original library (detailed [here](https://github.com/kgajera/stripe-onboarder/pull/7)). It has way more unit/integration tests and bug-fixes to ensure stability, and will be kept up to date regularly._
 
 # Stripe Onboarder
 
-[![npm version](https://badge.fury.io/js/stripe-onboarder.svg)](https://badge.fury.io/js/stripe-onboarder)
-[![Test](https://github.com/kgajera/stripe-onboarder/actions/workflows/test.yml/badge.svg)](https://github.com/kgajera/stripe-onboarder/actions/workflows/test.yml)
+[![npm version](https://badge.fury.io/js/@sponsorkit%2Fstripe-onboarder.svg)](https://badge.fury.io/js/@sponsorkit%2Fstripe-onboarder)
+[![Test](https://github.com/sponsorkit/stripe-onboarder/actions/workflows/publish.yml/badge.svg)](https://github.com/sponsorkit/stripe-onboarder/actions/workflows/publish.yml)
 
 Automate the onboarding of Stripe [Express](https://stripe.com/docs/connect/express-accounts) accounts using [Puppeteer](https://pptr.dev). This is intended to be used in Stripe's test mode to onboard verified Connect accounts without having to manually complete the onboarding process.
 
