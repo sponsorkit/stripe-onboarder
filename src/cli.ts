@@ -148,6 +148,7 @@ yargs(hideBin(process.argv))
         silent: false,
         url,
         values: argv,
+        debug: argv.debug ?? false
       });
 
       process.exit(0);
