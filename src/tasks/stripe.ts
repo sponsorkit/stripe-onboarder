@@ -7,6 +7,13 @@ export async function fillOutEmail(context: FlowContext) {
   );
   if (disabledEmailNode) return;
 
+  await context.page.$eval('#email', (el) => {
+    if('value' in el) {
+      el.value = '';
+    } else if('textContent' in el) {
+      el.textContent = '';
+    }
+  });
   await context.page.type("#email", context.values.email);
 }
 
