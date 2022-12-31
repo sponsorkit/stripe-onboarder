@@ -7,13 +7,9 @@ export async function fillOutEmail(context: FlowContext) {
   );
   if (disabledEmailNode) return;
 
-  await context.page.$eval('#email', (el) => {
-    if('value' in el) {
-      el.value = '';
-    } else if('textContent' in el) {
-      el.textContent = '';
-    }
-  });
+  // we tripple-click the email field to select the whole email address if it is already set, causing it to clear when typing
+  await context.page.click("#email", { clickCount: 3 })
+
   await context.page.type("#email", context.values.email);
 }
 
