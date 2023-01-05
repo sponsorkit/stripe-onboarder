@@ -216,8 +216,6 @@ async function fillOutPages(
   pageTasks: Array<(context: FlowContext) => Promise<void>>
 ) {
   for (const task of pageTasks) {
-    await waitForNavigation(context.page);
-
     const headingElement = await context.page.$("h1");
     const headingText = await headingElement?.evaluate((el) => el.textContent);
 
@@ -239,6 +237,12 @@ async function fillOutPages(
       async () => await waitForNavigation(context.page),
       getOraOptions(context.options, "Navigating...")
     );
+
+    const currentUrl = context.page.url();
+    if(!currentUrl.includes("stripe.com")) {
+      //we must have completed all steps early, since we are no longer on stripe.com
+      break;
+    }
   }
 }
 
