@@ -216,6 +216,11 @@ async function fillOutPages(
   pageTasks: Array<(context: FlowContext) => Promise<void>>
 ) {
   for (const task of pageTasks) {
+    await oraPromise(
+      async () => await waitForNavigation(context.page),
+      getOraOptions(context.options, "Navigating...")
+    );
+
     const headingElement = await context.page.$("h1");
     const headingText = await headingElement?.evaluate((el) => el.textContent);
 
