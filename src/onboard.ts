@@ -6,10 +6,11 @@ import {
   fillOutEmail,
   fillOutPhoneNumber,
   fillOutVerificationCode,
+  isOnStripePage,
 } from "./tasks/stripe";
 import allFlows from "./flows";
 import { Options, oraPromise } from "ora";
-import { type Browser, launch, type Page } from "puppeteer";
+import { type Browser, launch, type Page, TimeoutError } from "puppeteer";
 import type { FlowContext } from "./flows/context";
 import { waitForNavigation } from "./tasks/puppeteer";
 
@@ -216,37 +217,42 @@ async function fillOutPages(
   pageTasks: Array<(context: FlowContext) => Promise<void>>
 ) {
   for (const task of pageTasks) {
-    await oraPromise(
-      async () => await waitForNavigation(context.page),
-      getOraOptions(context.options, "Navigating...")
-    );
-
-    const headingElement = await context.page.$("h1");
-    const headingText = await headingElement?.evaluate((el) => el.textContent);
-
-    await oraPromise(async () => {
-      await task(context);
-    }, getOraOptions(context.options, headingText?.trim() ?? ""));
-
-    const validationErrors = await context.page.$$('*[role="alert"]');
-    if (validationErrors.length > 0) {
-      const errorMessages = await Promise.all(
-        validationErrors.map(
-          async (el) => await el.evaluate((e) => e.textContent)
-        )
+    try {
+      await oraPromise(
+        async () => await waitForNavigation(context.page),
+        getOraOptions(context.options, "Navigating...")
       );
-      throw new Error(`Validation errors found. ${errorMessages.join(". ")}`);
-    }
 
-    await oraPromise(
-      async () => await waitForNavigation(context.page),
-      getOraOptions(context.options, "Navigating...")
-    );
+      const headingElement = await context.page.$("h1");
+      const headingText = await headingElement?.evaluate((el) => el.textContent);
 
-    const currentUrl = context.page.url();
-    if(!currentUrl.includes("stripe.com")) {
-      //we must have completed all steps early, since we are no longer on stripe.com
-      break;
+      await oraPromise(async () => {
+        await task(context);
+      }, getOraOptions(context.options, headingText?.trim() ?? ""));
+
+      const validationErrors = await context.page.$$('*[role="alert"]');
+      if (validationErrors.length > 0) {
+        const errorMessages = await Promise.all(
+          validationErrors.map(
+            async (el) => await el.evaluate((e) => e.textContent)
+          )
+        );
+        throw new Error(`Validation errors found. ${errorMessages.join(". ")}`);
+      }
+
+      await oraPromise(
+        async () => await waitForNavigation(context.page),
+        getOraOptions(context.options, "Submitting...")
+      );
+    } catch(e: unknown) {
+      if(e instanceof TimeoutError) {
+        if(!isOnStripePage(context)) {
+          //if we somehow finished the form early, we don't want to throw an error.
+          return;
+        }
+      }
+       
+      throw e;
     }
   }
 }

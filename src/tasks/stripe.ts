@@ -1,4 +1,10 @@
+import type { Page } from "puppeteer";
 import type { FlowContext } from "../flows/context";
+
+export async function isOnStripePage(context: FlowContext) {
+  const currentUrl = context.page.url();
+  return currentUrl.includes("stripe.com");
+}
 
 export async function fillOutEmail(context: FlowContext) {
   // check if email field is disabled. may occur in test mode.
