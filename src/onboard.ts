@@ -244,8 +244,8 @@ async function fillOutPages(
         async () => await waitForNavigation(context.page),
         getOraOptions(context.options, "Submitting...")
       );
-    } catch(e: unknown) {
-      if(e instanceof TimeoutError) {
+    } catch(e: any) {
+      if('name' in e && e.name === 'TimeoutError') {
         if(!isOnStripePage(context)) {
           //if we somehow finished the form early, we don't want to throw an error.
           return;
