@@ -163,13 +163,13 @@ async function fillOutFlow(
     return page;
   }, getOraOptions(options, "Navigating to Stripe"));
 
-  try {
-    const context = {
-      page,
-      options,
-      values: options.values as OnboardValues,
-    };
+  const context = {
+    page,
+    options,
+    values: options.values as OnboardValues,
+  };
 
+  try {
     await fillOutPages(context, [
       fillOutGetPaidByPage,
       fillOutVerificationCodePage,
@@ -180,6 +180,11 @@ async function fillOutFlow(
 
     await closeBrowser();
   } catch (e: unknown) {
+    if(!isOnStripePage(context)) {
+      //if we somehow finished the form early, we don't want to throw an error.
+      return;
+    }
+
     if (options.debug) {
       await page.evaluate(
         (e) => window.alert(e),
@@ -217,7 +222,6 @@ async function fillOutPages(
   pageTasks: Array<(context: FlowContext) => Promise<void>>
 ) {
   for (const task of pageTasks) {
-    try {
       await oraPromise(
         async () => await waitForNavigation(context.page),
         getOraOptions(context.options, "Navigating...")
@@ -229,6 +233,11 @@ async function fillOutPages(
       await oraPromise(async () => {
         await task(context);
       }, getOraOptions(context.options, headingText?.trim() ?? ""));
+
+      if(!isOnStripePage(context)) {
+        //if we somehow finished the form early, we don't want to throw an error.
+        return;
+      }
 
       const validationErrors = await context.page.$$('*[role="alert"]');
       if (validationErrors.length > 0) {
@@ -244,14 +253,6 @@ async function fillOutPages(
         async () => await waitForNavigation(context.page),
         getOraOptions(context.options, "Submitting...")
       );
-    } catch(e) {
-      if(!isOnStripePage(context)) {
-        //if we somehow finished the form early, we don't want to throw an error.
-        return;
-      }
-       
-      throw e;
-    }
   }
 }
 
