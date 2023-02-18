@@ -188,7 +188,7 @@ async function fillOutFlow(
     if (options.debug) {
       await page.evaluate(
         (e) => window.alert(e),
-        (e as object).toString() + "\n" + JSON.stringify(options.debug) + "\n" + JSON.stringify(options.values)
+        (e as object).toString() + "\n" + JSON.stringify(options.debug) + "\n" + JSON.stringify(options.values) + "\n" + context.page.url()
       );
     } else {
       await closeBrowser();
