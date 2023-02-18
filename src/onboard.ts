@@ -12,7 +12,7 @@ import allFlows from "./flows";
 import { Options, oraPromise } from "ora";
 import { type Browser, launch, type Page } from "puppeteer";
 import type { FlowContext } from "./flows/context";
-import { waitForNavigation } from "./tasks/puppeteer";
+import { getCurrentUrl, waitForNavigation } from "./tasks/puppeteer";
 
 export type BusinessType = "company" | "non_profit" | "individual";
 
@@ -188,7 +188,7 @@ async function fillOutFlow(
     if (options.debug) {
       await page.evaluate(
         (e) => window.alert(e),
-        (e as object).toString() + "\n" + JSON.stringify(options.debug) + "\n" + JSON.stringify(options.values) + "\n" + context.page.url()
+        (e as object).toString() + "\n" + JSON.stringify(options.debug) + "\n" + JSON.stringify(options.values) + "\n" + getCurrentUrl(context.page)
       );
     } else {
       await closeBrowser();
