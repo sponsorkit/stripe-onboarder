@@ -1,7 +1,10 @@
 import type { FlowContext } from "../flows/context";
+import { waitForNavigation } from "./puppeteer";
 
 export async function isOnStripePage(context: FlowContext) {
-  const currentUrl = await context.page.evaluate('location.href') as string;
+  await waitForNavigation(context.page);
+
+  const currentUrl = await context.page.evaluate(() => document.location.href);
   return currentUrl.includes("stripe.com");
 }
 
