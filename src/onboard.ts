@@ -10,7 +10,7 @@ import {
 } from "./tasks/stripe";
 import allFlows from "./flows";
 import { Options, oraPromise } from "ora";
-import { type Browser, launch, type Page, TimeoutError } from "puppeteer";
+import { type Browser, launch, type Page } from "puppeteer";
 import type { FlowContext } from "./flows/context";
 import { waitForNavigation } from "./tasks/puppeteer";
 
