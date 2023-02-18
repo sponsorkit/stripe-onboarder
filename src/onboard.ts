@@ -180,7 +180,7 @@ async function fillOutFlow(
 
     await closeBrowser();
   } catch (e: unknown) {
-    if(!isOnStripePage(context)) {
+    if(!await isOnStripePage(context)) {
       //if we somehow finished the form early, we don't want to throw an error.
       return;
     }
