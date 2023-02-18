@@ -227,17 +227,17 @@ async function fillOutPages(
         getOraOptions(context.options, "Navigating...")
       );
 
+      if(!isOnStripePage(context)) {
+        //if we somehow finished the form early, we don't want to throw an error.
+        return;
+      }
+
       const headingElement = await context.page.$("h1");
       const headingText = await headingElement?.evaluate((el) => el.textContent);
 
       await oraPromise(async () => {
         await task(context);
       }, getOraOptions(context.options, headingText?.trim() ?? ""));
-
-      if(!isOnStripePage(context)) {
-        //if we somehow finished the form early, we don't want to throw an error.
-        return;
-      }
 
       const validationErrors = await context.page.$$('*[role="alert"]');
       if (validationErrors.length > 0) {
