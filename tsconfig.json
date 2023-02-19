@@ -4,7 +4,8 @@
     "lib": [
       "es2022",
       "DOM"
-    ]
+    ],
+    "resolveJsonModule": true
   },
   "include": [
     "src/**/*.ts",

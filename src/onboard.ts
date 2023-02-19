@@ -1,4 +1,5 @@
 import { faker } from "@faker-js/faker";
+import {version} from '../package.json';
 import {
   clickSubmitButton,
   fillOutBusinessType,
@@ -188,7 +189,7 @@ async function fillOutFlow(
     if (options.debug) {
       await page.evaluate(
         (e) => window.alert(e),
-        (e as object).toString() + "\n" + JSON.stringify(options.debug) + "\n" + JSON.stringify(options.values) + "\n" + getCurrentUrl(context.page)
+        (e as object).toString() + "\n" + JSON.stringify(options.debug) + "\n" + JSON.stringify(options.values) + "\n" + getCurrentUrl(context.page) + "\n" + version
       );
     } else {
       await closeBrowser();
