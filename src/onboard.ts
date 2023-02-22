@@ -137,9 +137,6 @@ async function fillOutFlow(
           width: 900,
           height: 1000,
         },
-        env: {
-          DISPLAY: ":10.0" /* needs to be set on Linux: https://github.com/puppeteer/puppeteer/issues/8148 */
-        },
         slowMo: 0,
         args: ["--lang=en-US,en"],
       }),
