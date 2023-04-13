@@ -5,5 +5,5 @@ export async function waitForNavigation(page: Page) {
 }
 
 export async function getCurrentUrl(page: Page) {
-   return await page.evaluate(() => document.location.href);
+   return await page.evaluate(() => document.URL);
 }
