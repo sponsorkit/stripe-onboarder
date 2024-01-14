@@ -13,6 +13,9 @@ Automate the onboarding of Stripe [Express](https://stripe.com/docs/connect/expr
 
 Onboarding accounts with the [`card_payments`](https://stripe.com/docs/api/accounts/object#account_object-capabilities-card_payments) and [`transfers`](https://stripe.com/docs/api/accounts/object#account_object-capabilities-transfers) capabilities are supported. Please open an [issue](https://github.com/kgajera/stripe-onboarder/issues/new) if the onboarder is not working with your account's requested capabilities.
 
+## Captchas
+Stripe started using captchas in their onboarding flow, which sometimes makes this program not work. Please contact their [developer Discord](https://stripe.com/go/developer-chat) and share your opinion on this. It is problematic that we can't programmatically test our Stripe Connect integration end-to-end, in their test environment.
+
 ## Installation
 
 Install the package with:
